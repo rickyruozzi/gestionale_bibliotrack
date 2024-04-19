@@ -40,7 +40,24 @@ def switch(s):
         conn.close()
         print('dati eliminati\n')
     if s=='M':
-        print('Modifica')
+        campo=input('inserire il campo da modificare: ')
+        valore=input('inserire il nuovo valore: ')
+        if campo=='Anno_pubblicazione':
+            valore=int(valore)
+        id=input("inserire id dell'elemento da modificare: ")
+        id=int(id)
+        query = f"UPDATE libri SET {campo}=%s WHERE PK_Id_libro=%s"
+        conn = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            password="Ruozzi1234",
+            database="bibliotrack",
+            port=3306,
+            )
+        cur = conn.cursor()
+        cur.execute(query,(valore,id))
+        conn.commit()
+        conn.close()
     if s=='V':
         conn=mysql.connector.connect(
             host='127.0.0.1',
