@@ -1,4 +1,5 @@
-import subprocess
+import subprocess 
+import mysql.connector
 
 def switch(scelta):
     if scelta=='1':
