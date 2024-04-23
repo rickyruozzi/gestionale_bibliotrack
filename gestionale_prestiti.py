@@ -3,12 +3,10 @@ from prettytable import PrettyTable
 
 def switch(s):
     if s=='A':
-        titolo=input('inserisci il titolo del libro: ')
-        autore=input("inserisci l'autore del libro: ")
-        genere=input('inserisci il genere del libro: ')
-        casa_editrice=input('inserisci la casa editrice del libro: ')
-        anno_pubblicazione=int(input("inserisci l'anno di pubblicazione de libro: "))
-        collana=input('inserisci la collana del libro: ')
+        utente=input("inserire l'utente per il prestito: ")
+        autore=input("inserisci il libro oggetto del prestito:  ")
+        scadenza=input("inserire la scadenza del prestito: ")
+        inizio=input("inserisci la data di inizio del prestito: ")
         conn=mysql.connector.connect(
             host='127.0.0.1',
             port=3306,
@@ -17,14 +15,14 @@ def switch(s):
             database='bibliotrack'   
         )
         cur=conn.cursor()
-        query = "INSERT INTO libri(Titolo,Autore,Casa_editrice,Anno_pubblicazione,Collana,Genere) VALUES (%s,%s,%s,%s,%s,%s) "
-        values=(titolo,autore,casa_editrice,anno_pubblicazione,collana,genere)
+        query = "INSERT INTO prestiti(FK_Id_utente,FK_Id_libro,scadenza_prestito,inizio_prestito) VALUES (%s,%s,%s,%s) "
+        values=(utente, autore, scadenza, inizio)
         cur.execute(query,values)
         conn.commit()
         conn.close()
         print('dati aggiunti\n')
     if s=='D':
-        id=int(input('inserire id del libro da eliminare: '))
+        id=int(input('inserire id del prestito da eliminare: '))
         conn=mysql.connector.connect(
             host='127.0.0.1',
             port=3306,
@@ -33,7 +31,7 @@ def switch(s):
             database='bibliotrack'   
         )
         cur=conn.cursor()
-        query = "DELETE FROM libri WHERE PK_Id_libro=%s"
+        query = "DELETE FROM prestiti WHERE PK_Id_prestito=%s"
         values = (id,)
         cur.execute(query, values)
         conn.commit()
@@ -46,7 +44,7 @@ def switch(s):
             valore=int(valore)
         id=input("inserire id dell'elemento da modificare: ")
         id=int(id)
-        query = f"UPDATE libri SET {campo}=%s WHERE PK_Id_libro=%s"
+        query = f"UPDATE prestiti SET {campo}=%s WHERE PK_Id_prestito=%s"
         conn = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
@@ -67,7 +65,7 @@ def switch(s):
             database='bibliotrack'   
         )
         cur=conn.cursor()
-        query = "select * from libri"
+        query = "select * from prestiti"
         cur.execute(query)
         dati=cur.fetchall()
         # print(dati)
@@ -75,23 +73,20 @@ def switch(s):
             print("Nessun libro trovato nel database.")
         else:
             for data in dati:
-                print("ID:", data[0])
-                print("Titolo:", data[1])
-                print("Autore:", data[2])
-                print("Genere:", data[3])
-                print("Casa editrice:", data[4])
-                print("Anno di pubblicazione:", data[5])
-                print("Collana:", data[6])
-                print("\n")
+                print("ID_Persona:", data[0])
+                print("ID_Libro:", data[1])
+                print("scadenza:", data[2])
+                print("inizio:", data[3])
+                print('\n')
         conn.close()
         
 if __name__=="__main__":
-    print('benvenuto nel gestionale BiblioTrack!')
+    print('benvenuto nel gestionlae BiblioTrack!')
     scelta=''
     while scelta!='0':
-        scelta=input('Quale operazione vuoi eseguire:\nA - aggiungi un libro al database\nD - elimina un libro dal database\nM - modifica un libro nel database\nV - visualizzare i libri nel database\n0 - per uscire\n')
+        scelta=input('Quale operazione vuoi eseguire:\nA - aggiungi un prestito al database\nD - elimina un prestito dal database\nM - modifica un prestito nel database\nV - visualizzare i prestiti nel database\n0 - per uscire\n')
         while scelta!='A' and scelta!='D' and scelta!='M' and scelta!='V' and scelta!='0':
-            scelta=input('Quale operazione vuoi eseguire:\nA - aggiungi un libro al database\nD - elimina un libro dal database\nM - modifica un libro nel database\nV - visualizzare i libri nel database\n0 - per uscire\n')
+            scelta=input('Quale operazione vuoi eseguire:\nA - aggiungi un prestito al database\nD - elimina un prestito dal database\nM - modifica un prestito nel database\nV - visualizzare i prestiti nel database\n0 - per uscire\n')
         if scelta=='0': break
         switch(scelta)
     print('Arrivederci!')
