@@ -70,7 +70,7 @@ def switch(s):
         dati=cur.fetchall()
         # print(dati)
         if not dati:
-            print("Nessun libro trovato nel database.")
+            print("Nessun prestito trovato nel database.")
         else:
             for data in dati:
                 print("ID_Persona:", data[0])
@@ -81,7 +81,7 @@ def switch(s):
         conn.close()
         
 if __name__=="__main__":
-    print('benvenuto nel gestionlae BiblioTrack!')
+    print('benvenuto nel gestionale BiblioTrack!')
     scelta=''
     while scelta!='0':
         scelta=input('Quale operazione vuoi eseguire:\nA - aggiungi un prestito al database\nD - elimina un prestito dal database\nM - modifica un prestito nel database\nV - visualizzare i prestiti nel database\n0 - per uscire\n')
