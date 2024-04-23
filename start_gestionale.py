@@ -4,6 +4,8 @@ import mysql.connector
 def switch(scelta):
     if scelta=='1':
         exec(open("gestionale_catalogo.py").read())
+    if scelta=='2':
+        exec(open("gestionale_prestiti.py").read())
     else:
         print('opzione non ancora disponibile')
 
