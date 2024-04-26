@@ -73,10 +73,10 @@ def switch(s):
             print("Nessun prestito trovato nel database.")
         else:
             for data in dati:
-                print("ID_Persona:", data[0])
-                print("ID_Libro:", data[1])
-                print("scadenza:", data[2])
-                print("inizio:", data[3])
+                print("ID_Persona:", data[1])
+                print("ID_Libro:", data[2])
+                print("scadenza:", data[3])
+                print("inizio:", data[4])
                 print('\n')
         conn.close()
         
