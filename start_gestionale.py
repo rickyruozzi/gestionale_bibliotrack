@@ -71,3 +71,4 @@ root.mainloop()
 
 # Centra la finestra dopo il mainloop
 center_window(root)
+
