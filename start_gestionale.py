@@ -14,6 +14,7 @@ def switch(scelta):
 def show_error(title, message):
     error_window = ctk.CTk()
     error_window.title(title)
+    error_window.geometry('400x200')
     
     error_label = ctk.CTkLabel(error_window, text=message, font=("Arial", 12))
     error_label.pack(pady=20)
@@ -38,7 +39,7 @@ def center_window(window):
 # Creazione della finestra principale
 root = ctk.CTk()
 root.title("Gestionale Bibliotrack")
-root.geometry("400x250")
+root.geometry("700x400")
 
 # Creazione del frame
 main_frame = ctk.CTkFrame(root)

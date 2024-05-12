@@ -98,6 +98,7 @@ def show_error(title, message):
 # Creazione della finestra principale
 root = ctk.CTk()
 root.title("Gestionale BiblioTrack")
+root.geometry("500x400")
 
 # Creazione dei widget
 username_label = ctk.CTkLabel(root, text="Username:")
